@@ -44,12 +44,12 @@ namespace {
 	template<typename T>
 	int calc_mantissa()
 	{
-		int mantissa = 1;
+		int mantissa = 0;
 		for (int i = 0; i < NUMBER_OF_ITERATIONS; ++i)
 		{
-			if (static_cast<T>(1) + static_cast<T>(std::pow(10, -1 * mantissa))== static_cast<T>(1))
+			if (static_cast<T>(1) + static_cast<T>(std::pow(2, -1 * mantissa)) == static_cast<T>(1))
 			{
-				return mantissa;
+				return mantissa - 1;
 			}
 			++mantissa;
 		}
@@ -66,9 +66,9 @@ namespace {
 			T temp = static_cast<T>(std::pow(10, min_pow));
 			if (temp >= prev)
 			{
-				return min_pow;
+				return min_pow + 2;
 			}
-			prev = temp;
+			prev = static_cast<T>(std::pow(10, min_pow));
 			--min_pow;
 		}
 		return -1;
@@ -82,6 +82,42 @@ namespace {
 		for (int i = 0; i < NUMBER_OF_ITERATIONS; ++i)
 		{
 			T temp = static_cast<T>(std::pow(10, max_pow));
+			if (temp <= prev)
+			{
+				return max_pow - 2;
+			}
+			prev = temp;
+			++max_pow;
+		}
+		return -1;
+	}
+
+	template<typename T>
+	int calc_min_pow_of_two()
+	{
+		int min_pow = -1;
+		T prev = 1;
+		for (int i = 0; i < NUMBER_OF_ITERATIONS; ++i)
+		{
+			T temp = static_cast<T>(std::pow(2, min_pow));
+			if (temp >= prev)
+			{
+				return min_pow;
+			}
+			prev = temp;
+			--min_pow;
+		}
+		return -1;
+	}
+
+	template<typename T>
+	int calc_max_pow_of_two()
+	{
+		int max_pow = 1;
+		T prev = 0;
+		for (int i = 0; i < NUMBER_OF_ITERATIONS; ++i)
+		{
+			T temp = static_cast<T>(std::pow(2, max_pow));
 			if (temp >= prev)
 			{
 				return max_pow;
@@ -91,7 +127,6 @@ namespace {
 		}
 		return -1;
 	}
-
 	template<typename T>
 	T* comparing()
 	{
@@ -136,7 +171,7 @@ float epsilon_float_search_v3()
 {
 	auto left_condition = [](float epsilon) {return 1.f + epsilon / 2.f == 1.f; };
 	auto right_condition = [](float epsilon) {return 1.f + epsilon != 1.f; };
-	return BSearch<float>(0.f, 2.f, left_condition, right_condition, 1e-13f);
+	return BSearch<float>(0.f, 2.f, left_condition, right_condition, 1e-39f);
 }
 
 double epsilon_double_search_v1()

@@ -1,5 +1,6 @@
 #pragma once
 #include <functional>
+#include <vector>
 
 class Entity
 {
@@ -37,6 +38,6 @@ public:
 	{
 	}
 
-	double solve();
+	double solve(std::vector<double> values);
 	const double WRONG_SOLUTION = nan("");
 };

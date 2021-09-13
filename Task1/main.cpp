@@ -26,6 +26,8 @@ int main(void)
 	std::cout << "Task 1.3 : Find max and min pow" << std::endl;
 	std::cout << "	For float: max = " << calc_max_pow<float>()<<", min = "<<calc_min_pow<float>() << std::endl;
 	std::cout << "	For double: max = " << calc_max_pow<double>()<<", min = "<<calc_min_pow<double>() << std::endl;
+	std::cout << " Real double min = " << std::numeric_limits<double>::min() << std::endl;
+	std::cout << " Real double max = " << std::numeric_limits<double>::max() << std::endl;
 	std::cout << "-----" << std::endl;
 	/// Comparing
 	/// Запишем некоторые размышления.

@@ -24,9 +24,11 @@ double derivative_function(double x)
 int main(void)
 {
 	double left = u - pow(M_PI, 2) / (8 * a * a);
-	std::cout << Newton_method(left, u, 1e-8, function, derivative_function).solve() << std::endl;
+	std::vector<double> newton_solves;
+	std::cout << Newton_method(left, u, 1e-8, function, derivative_function).solve(newton_solves) << std::endl;
 	left = u - pow(M_PI, 2) / (8 * a * a) + 1e-9;
-	std::cout << Dichotomy_method(left, u - 1e-9, 1e-8, function, nullptr).solve() << std::endl;
+	std::vector<double> dichotomy_solves;
+	std::cout << Dichotomy_method(left, u - 1e-9, 1e-8, function, nullptr).solve(dichotomy_solves) << std::endl;
 	std::vector<double> tan_y;
 	std::vector<double> tan_x;
 	double x = u - 25 * M_PI / (8 * a * a);
