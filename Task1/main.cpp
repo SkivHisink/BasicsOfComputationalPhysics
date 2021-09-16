@@ -23,18 +23,18 @@ int main(void)
 	std::cout << "	For double: " << calc_mantissa<double>() << std::endl;
 	std::cout << "-----" << std::endl;
 	/// Найти максимальнуюи минимальную степени
-	std::cout << "Task 1.3 : Find max and min pow of 10" << std::endl;
+	std::cout << "Task 1.3.1 : Find max and min pow of 10" << std::endl;
 	std::cout << "	For float: max = " << calc_max_pow<float>()<<", min = "<<calc_min_pow<float>() << std::endl;
+	std::cout << "		Real float max exponent 10:max = " << std::numeric_limits<float>::max_exponent10 << ", min = " << std::numeric_limits<float>::min_exponent10 << std::endl;
 	std::cout << "	For double: max = " << calc_max_pow<double>()<<", min = "<<calc_min_pow<double>() << std::endl;
-	std::cout << " Real double exponent 10:max = " << std::numeric_limits<double>::max_exponent10<<", min = "<<std::numeric_limits<double>::min_exponent10 << std::endl;
-	std::cout << " Real float max exponent 10:max = " << std::numeric_limits<double>::max_exponent10 << ", min = " << std::numeric_limits<double>::min_exponent10 << std::endl;
+	std::cout << "		Real double exponent 10:max = " << std::numeric_limits<double>::max_exponent10<<", min = "<<std::numeric_limits<double>::min_exponent10 << std::endl;
 	std::cout << "-----" << std::endl;
 	/// Найти максимальнуюи минимальную степени
-	std::cout << "Task 1.3 : Find max and min pow of 2" << std::endl;
+	std::cout << "Task 1.3.2 : Find max and min pow of 2" << std::endl;
 	std::cout << "	For float: max = " << calc_max_pow_of_two<float>() << ", min = " << calc_min_pow_of_two<float>() << std::endl;
+	std::cout << "		Real float max exponent 2:max = " << std::numeric_limits<float>::max_exponent << ", min = " << std::numeric_limits<float>::min_exponent << std::endl;
 	std::cout << "	For double: max = " << calc_max_pow_of_two<double>() << ", min = " << calc_min_pow_of_two<double>() << std::endl;
-	std::cout << " Real double exponent 2:max = " << std::numeric_limits<double>::max_exponent << ", min = " << std::numeric_limits<double>::min_exponent << std::endl;
-	std::cout << " Real float max exponent 2:max = " << std::numeric_limits<float>::max_exponent << ", min = " << std::numeric_limits<float>::min_exponent << std::endl;
+	std::cout << "		Real double exponent 2:max = " << std::numeric_limits<double>::max_exponent << ", min = " << std::numeric_limits<double>::min_exponent << std::endl;
 	std::cout << "-----" << std::endl;
 	/// Comparing
 	/// Запишем некоторые размышления.

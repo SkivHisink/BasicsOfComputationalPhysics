@@ -63,10 +63,10 @@ namespace {
 		T prev = 1;
 		for (int i = 0; i < NUMBER_OF_ITERATIONS; ++i)
 		{
-			T temp = static_cast<T>(std::pow(10, min_pow));
-			if (temp >= prev)
+			T temp = static_cast<T>(std::pow(static_cast<T>(10), min_pow));
+			if (temp >= prev || temp <= std::numeric_limits<T>::min())
 			{
-				return min_pow + 2;
+				return min_pow + 1;
 			}
 			prev = temp;
 			--min_pow;
@@ -82,7 +82,7 @@ namespace {
 		for (int i = 0; i < NUMBER_OF_ITERATIONS; ++i)
 		{
 			T temp = static_cast<T>(std::pow(10, max_pow));
-			if (temp <= prev)
+			if (temp <= prev || isinf(temp))
 			{
 				return max_pow - 2;
 			}
@@ -100,9 +100,9 @@ namespace {
 		for (int i = 0; i < NUMBER_OF_ITERATIONS; ++i)
 		{
 			T temp = static_cast<T>(std::pow(2, min_pow));
-			if (temp >= prev)
+			if (temp >= prev || temp <= std::numeric_limits<T>::min())
 			{
-				return min_pow;
+				return min_pow + 1;
 			}
 			prev = temp;
 			--min_pow;
@@ -118,7 +118,7 @@ namespace {
 		for (int i = 0; i < NUMBER_OF_ITERATIONS; ++i)
 		{
 			T temp = static_cast<T>(std::pow(2, max_pow));
-			if (temp <= prev)
+			if (temp <= prev || isinf(temp))
 			{
 				return max_pow;
 			}
