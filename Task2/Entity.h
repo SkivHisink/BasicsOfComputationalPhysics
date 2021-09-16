@@ -38,6 +38,6 @@ public:
 	{
 	}
 
-	double solve(std::vector<double> values);
+	double solve(std::vector<double>& values);
 	const double WRONG_SOLUTION = nan("");
 };

@@ -68,7 +68,7 @@ namespace {
 			{
 				return min_pow + 2;
 			}
-			prev = static_cast<T>(std::pow(10, min_pow));
+			prev = temp;
 			--min_pow;
 		}
 		return -1;
@@ -118,7 +118,7 @@ namespace {
 		for (int i = 0; i < NUMBER_OF_ITERATIONS; ++i)
 		{
 			T temp = static_cast<T>(std::pow(2, max_pow));
-			if (temp >= prev)
+			if (temp <= prev)
 			{
 				return max_pow;
 			}
