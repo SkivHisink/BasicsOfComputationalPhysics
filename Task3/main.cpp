@@ -1,8 +1,12 @@
-
-
 #include <functional>
+#include <iomanip>
 #include <iostream>
 #include <string>
+#include <vector>
+#ifndef _DEBUG
+#include "matplotlibcpp.h"
+namespace plt = matplotlibcpp;
+#endif
 
 double Trapezoid_method(const double left_boundary_, const double right_boundary_,
 	const double precision_, const std::function<double(double)>& function_,
@@ -11,10 +15,11 @@ double Trapezoid_method(const double left_boundary_, const double right_boundary
 	return (function_(left_boundary_) + function_(right_boundary_)) / 2 * (right_boundary_ - left_boundary_);
 }
 double Compound_Trapezoid_method(const double left_boundary_, const double right_boundary_,
-	const double precision_, const std::function<double(double)>& function_, int number_of_parts)
+	double precision_, const std::function<double(double)>& function_, int number_of_parts)
 {
 	double result = 0.;
 	double part = (right_boundary_ - left_boundary_) / number_of_parts;
+	auto prev = 0.0;
 	for (int i = 0; i < number_of_parts - 1; ++i)
 	{
 		double x_1 = left_boundary_ + part * i;
@@ -73,9 +78,31 @@ double function_task_2(double x)
 void test(const double left_boundary_, const double right_boundary_,
 	const double precision_, const std::function<double(double)>& function_, int number_of_parts, const std::string& answer)
 {
-	std::cout << "Trapezoid_method:" << Trapezoid_method(left_boundary_, right_boundary_, 0, function_, nullptr) << std::endl;
+	//std::cout << "Trapezoid_method:" << Trapezoid_method(left_boundary_, right_boundary_, 0, function_, nullptr) << std::endl;
+	//std::cout << "Simpson_method:" << Simpson_method(left_boundary_, right_boundary_, 0, function_, number_of_parts) << std::endl;
+	std::vector<double> trapezoind_results;
+	std::vector<double> simpson_results;
+	std::vector<double> number_of_parts_vec;
+	std::cout << std::setw(3) << "n";
+	std::cout << std::setw(20) << "Trapezoid";
+	std::cout << std::setw(37) << "Simpson" << std::endl;
+	for (int i = 4; i < 257; i += 4)
+	{
+		trapezoind_results.push_back(Compound_Trapezoid_method(left_boundary_, right_boundary_, 0, function_, i));
+		simpson_results.push_back(Simpson_Kortes_method(left_boundary_, right_boundary_, 0, function_, i));
+		number_of_parts_vec.push_back(i);
+		std::cout << std::setw(3) << i ;
+		std::cout << std::setw(20) << std::setprecision(10) << trapezoind_results[trapezoind_results.size() - 1] << std::setw(37) << simpson_results[simpson_results.size() - 1] << std::endl;
+	}
+#ifndef _DEBUG
+	plt::named_plot("Trapezoid_method", number_of_parts_vec, trapezoind_results);
+	plt::named_plot("Kortes_method", number_of_parts_vec, simpson_results);
+	//plt::scatter( number_of_parts_vec, trapezoind_results);
+	//plt::scatter( number_of_parts_vec, simpson_results);
+	plt::legend();
+	plt::show();
+#endif
 	std::cout << "Compound_Trapezoid_method:" << Compound_Trapezoid_method(left_boundary_, right_boundary_, 0, function_, number_of_parts) << std::endl;
-	std::cout << "Simpson_method:" << Simpson_method(left_boundary_, right_boundary_, 0, function_, number_of_parts) << std::endl;
 	std::cout << "Simpson_Kortes_method:" << Simpson_Kortes_method(left_boundary_, right_boundary_, 0, function_, number_of_parts) << std::endl;
 	std::cout << "Correct anwser is " << answer << std::endl;
 	std::cout << "--------------" << std::endl;

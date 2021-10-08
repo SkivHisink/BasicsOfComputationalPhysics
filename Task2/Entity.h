@@ -12,7 +12,7 @@ protected:
 	const double precision;
 	const std::function<double(double)>& function;
 	const std::function<double(double)>& derivative;
-
+	bool need_to_border_cuttoff;
 	virtual void checkingFunctionExisting() { }
 	virtual double get_next_value(double current)
 	{
@@ -32,9 +32,9 @@ public:
 
 	explicit Entity(const double left_boundary_, const double right_boundary_,
 		const double precision_, const std::function<double(double)>& function_,
-		const std::function<double(double)>& derivative_ = nullptr) :
+		const std::function<double(double)>& derivative_ = nullptr, bool need_to_border_cuttoff_ = false) :
 		left_boundary(left_boundary_), right_boundary(right_boundary_),
-		precision(precision_), function(function_), derivative(derivative_)
+		precision(precision_), function(function_), derivative(derivative_), need_to_border_cuttoff(need_to_border_cuttoff_)
 	{
 	}
 

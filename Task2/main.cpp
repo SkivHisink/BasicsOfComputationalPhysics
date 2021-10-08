@@ -1,11 +1,11 @@
-#define _USE_MATH_DEFINES
+﻿#define _USE_MATH_DEFINES
 #define _CRT_SECURE_NO_WARNINGS
 #include <cstdlib>
-#include <string>
 #include <iostream>
 #include <vector>
 #include "Newton_method.h"
 #include "Dichotomy_method.h"
+#include <string>
 #ifndef _DEBUG
 #include "matplotlibcpp.h"
 namespace plt = matplotlibcpp;
@@ -31,17 +31,21 @@ int main(void)
 	double left = u - pow(M_PI, 2) / (8 * a * a);
 	double precision = 1e-15;
 	if (left <= 0) left = precision;
+	//Метод Ньютона
 	std::vector<double> newton_solves;
+	std::cout << Newton_method(left, u, precision, function_x, derivative_function, true).solve(newton_solves) << std::endl;
+	//Метод Простых итераций
 	std::vector<double> simple_iteration_solves;
-	std::cout << Newton_method(left, u, precision, function_x, derivative_function).solve(newton_solves) << std::endl;
-	std::cout << Newton_method(left, u, precision, function_x, for_method_of_simple_iteration).solve(simple_iteration_solves) << std::endl;
+	std::cout << Newton_method(left, u, precision, function_x, for_method_of_simple_iteration, false).solve(simple_iteration_solves) << std::endl;
 
 	left = u - pow(M_PI, 2) / (8 * a * a) + 1e-9;
+	//Метод дихотомии
 	std::vector<double> dichotomy_solves;
-	std::cout << Dichotomy_method(left, u - 1e-15, precision, function_x, nullptr).solve(dichotomy_solves) << std::endl;
+	std::cout << Dichotomy_method(left, u - 1e-15, precision, function_x, nullptr, false).solve(dichotomy_solves) << std::endl;
 #ifndef _DEBUG
 	plt::named_plot("newton", newton_solves);
 	plt::named_plot("dichotomy", dichotomy_solves);
+	plt::named_plot("simple_iteration", simple_iteration_solves);
 	plt::legend();
 	plt::show();
 #endif
