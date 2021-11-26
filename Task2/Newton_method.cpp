@@ -25,6 +25,7 @@ double Newton_method::get_next_value(double current)
 	}
 	return (x - function(x) / g);
 }
+
 double Newton_method::middle_of_interval(const double left_boundary_, const double right_boundary_)
 {
 	split_ratio += 2;
